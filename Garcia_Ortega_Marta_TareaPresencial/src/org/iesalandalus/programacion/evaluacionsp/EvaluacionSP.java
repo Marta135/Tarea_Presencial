@@ -131,6 +131,7 @@ public class EvaluacionSP {
 		if (superaCalificacionCorte(examen.getCalificacion())==true 
 			&& superaCalificacionCorte(tareasOnline.getCalificacion())==true 
 			&& superaCalificacionCorte(tareasPresenciales.getCalificacion())==true)
+			
 			return true;
 		else
 			return false;
