@@ -2,7 +2,9 @@ package org.iesalandalus.programacion.evaluacionsp;
 
 public class EvaluacionSP {
 
-	//Atributos
+	/**
+	 * Atributos
+	 */
 	private static final float PESO_PARTICIPACION=0.1f;
 	private static final float PESO_CUESTIONARIOS=0.05f;
 	private static final float PESO_TAREAS_ONLINE=0.25f;
@@ -18,8 +20,10 @@ public class EvaluacionSP {
 	private Instrumento examen;
 	
 	
-	//Constructor con parámetros
-	
+	/**
+	 * Constructor con parámetros
+	 * Asigna valor a los atributos.
+	 */
 	public EvaluacionSP (String nombre) throws NullPointerException, IllegalArgumentException {
 		
 		setNombre(nombre);
@@ -32,8 +36,9 @@ public class EvaluacionSP {
 	}
 	
 	
-	//Métodos getters y setters
-	
+	/**
+	 * Métodos getters y setters
+	 */
 	public String getNombre() {
 		return nombre;
 	}
@@ -41,7 +46,7 @@ public class EvaluacionSP {
 	private void setNombre(String nombre) {
 		
 		if (nombre == null)
-			throw new NullPointerException ("ERROR: El nombre introducido no puede ser nulo");
+			throw new NullPointerException ("ERROR: El nombre introducido no puede ser nulo. ");
 			
 		this.nombre = nombre;
 	}
@@ -67,30 +72,34 @@ public class EvaluacionSP {
 	}
 	
 	
-	//Método getCalificacion
+	/**
+	 * Método getCalificacion
+	 * Calcula la calificación de la evaluación.
+	 */
 	public float getCalificacion() {
 		
-		float notaParticipacion, notaTareaOnline, notaTareaPresencial, notaCuestionarios, notaExamen, notaFinal;
-		
-		notaParticipacion=participacion.getCalificacionPonderada();
-		notaCuestionarios=cuestionarios.getCalificacionPonderada();
-		notaTareaOnline=tareasOnline.getCalificacionPonderada();
-		notaTareaPresencial=tareasPresenciales.getCalificacionPonderada();
-		notaExamen=examen.getCalificacionPonderada();
-		
-		notaFinal=notaParticipacion+notaCuestionarios+notaTareaOnline+notaTareaPresencial+notaExamen;
+		float notaEvaluacion;
+	
+		notaEvaluacion=(participacion.getCalificacionPonderada())
+						+ (cuestionarios.getCalificacionPonderada())
+						+ (tareasOnline.getCalificacionPonderada())
+						+ (tareasPresenciales.getCalificacionPonderada())
+						+ (examen.getCalificacionPonderada());
 		
 		if (superaInstrumentosObligatorios()==true)
-			return notaFinal;
-		else if (superaCalificacionCorte(notaFinal)==true)	
+			return notaEvaluacion;
+		else if (superaCalificacionCorte(notaEvaluacion)==true)	
 			return CALIFICACION_ALGUN_INSTRUMENTO_OBLIGATORIO_NO_SUPERADO;
 		else 
-			return notaFinal;
+			return notaEvaluacion;
 		
 	}
 	
 	
-	//Método getResultado
+	/**
+	 * Método getResultado
+	 * Indica si la calificación supera la nota de corte o no.
+	 */
 	public Resultado getResultado() {
 		
 		if(getCalificacion()>=5)
@@ -100,8 +109,10 @@ public class EvaluacionSP {
 	}
 	
 	
-	//Método superaCalificacionCorte
-	
+	/**
+	 * Método superaCalificacionCorte
+	 * Indica si el parámetro pasado supera la calificación de corte.
+	 */
 	private boolean superaCalificacionCorte(float calificacion) {
 	
 		if(calificacion>=CALIFICACION_CORTE)
@@ -111,27 +122,25 @@ public class EvaluacionSP {
 	}
 	
 	
-	//Método superaInstrumentosObligatorios
-	//Revisar 
-	
+	/**
+	 * Método superaInstrumentosObligatorios
+	 * Devuelve un valor lógico si tareasOnline, tareasPresenciales y examen superan la calificación de corte. 
+	 */
 	private boolean superaInstrumentosObligatorios() {
 	
-		float notaExamen, notaTareaOnline, notaTareaPresencial;
-		
-		notaExamen=examen.getCalificacion();
-		notaTareaOnline=tareasOnline.getCalificacion();
-		notaTareaPresencial=tareasPresenciales.getCalificacion();
-		
-		if(notaExamen>=5 && notaTareaOnline>=5 && notaTareaPresencial>=5)
+		if (superaCalificacionCorte(examen.getCalificacion())==true 
+			&& superaCalificacionCorte(tareasOnline.getCalificacion())==true 
+			&& superaCalificacionCorte(tareasPresenciales.getCalificacion())==true)
 			return true;
 		else
 			return false;
-		
 	}
 
 
-	//Método toString
-	
+	/**
+	 * Método toString
+	 * Imprimirá la calificación y el resultado de la misma.
+	 */
 	@Override
 	public String toString() {
 		return "Resultado Primera Evaluación: [Calificación=" + this.getCalificacion() + ", Resultado=" + this.getResultado() + "]";

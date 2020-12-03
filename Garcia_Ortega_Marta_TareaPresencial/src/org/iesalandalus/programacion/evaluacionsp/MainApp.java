@@ -2,8 +2,18 @@ package org.iesalandalus.programacion.evaluacionsp;
 
 public class MainApp {
 
+	/**
+	 * Atributo
+	 */
 	private static EvaluacionSP primeraEvaluacion;
 	
+	
+	/**
+	 * Método main
+	 * Crea una instancia de EvaluacionSP y la asigna al atributo.
+	 * Lee las calificaciones de los distintos instrumentos (método de la clase Consola).
+	 * Y muestra la calificación y el resultado de la evaluación. 
+	 */
 	public static void main(String[] args) {
 		
 		try {

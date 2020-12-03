@@ -2,7 +2,9 @@ package org.iesalandalus.programacion.evaluacionsp;
 
 public class Instrumento {
 
-	//Atributos
+	/**
+	 * Atributos
+	 */
 	private static final float PESO_MINIMO=0f;
 	private static final float PESO_MAXIMO=1f;
 	private static final float CALIFICACION_MINIMA=0f;
@@ -12,16 +14,21 @@ public class Instrumento {
 	private float calificacion;
 	
 	
-	//Constructor con parámetros
+	/**
+	 * Constructor con parámetros
+	 * Asigna valor a los atributos.
+	 */
 	public Instrumento (String nombre, float peso) {
 		
 		setNombre(nombre);
 		setPeso(peso);
-		calificacion=0;
+		calificacion=0f;
 	}
 	
 	
-	//Getters y setters
+	/**
+	 * Getters y setters
+	 */
 	public String getNombre() {
 		return nombre;
 	} 
@@ -29,7 +36,7 @@ public class Instrumento {
 	private void setNombre(String nombre) {
 		
 		if (nombre == null)
-			throw new NullPointerException ("ERROR: El nombre introducido no puede ser nulo");
+			throw new NullPointerException ("ERROR: El nombre introducido no puede ser nulo. ");
 		
 		this.nombre = nombre;
 	}
@@ -41,7 +48,7 @@ public class Instrumento {
 	private void setPeso(float peso) {
 		
 		if (peso<PESO_MINIMO || peso>PESO_MAXIMO)
-			throw new IllegalArgumentException("ERROR: El peso introducido no es válido.");
+			throw new IllegalArgumentException("ERROR: El peso introducido no es válido. ");
 		
 		this.peso = peso;
 	}
@@ -58,15 +65,20 @@ public class Instrumento {
 		this.calificacion = calificacion;
 	}
 	
-	//Método getCalificacionPonderada
 	
+	/**
+	 * Método getCalificacionPonderada
+	 * Devolverá el valor calculado a partir de los atributos peso y calificacion.
+	 */
 	public float getCalificacionPonderada () {
 		return calificacion*peso;
 	}
 
 
-	//Método toString
-	
+	/**
+	 * Método toString
+	 * Mostrará el nombre, el peso, la calificación y la calificación ponderada del instrumento. 
+	 */
 	@Override
 	public String toString() {
 		return "Nombre=" + this.nombre + ", peso=" + this.peso + ", calificación=" + this.calificacion
